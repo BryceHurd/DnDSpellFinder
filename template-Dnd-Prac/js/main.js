@@ -1,20 +1,26 @@
 
 //Example fetch using DnD5eAPI - place subclasses in ul
 document.querySelector('button').addEventListener('click', getFetch)
-let clicked = 0;
+
+
 
 function getFetch(){
 
-  //trying figure out away to remove ul 
-  let removeElemnt = document.querySelectorAll("#class","#subClass");
+  //trying figure out away to remove ul   
+  const classList = document.querySelector(`ul`); 
+
+  //const subClassList = document.querySelector(`ul`);
     
-  clicked += 1;
+  
   
   let choice = document.querySelector('input').value  
   //replacing spaces with -
   choice = choice.replace(" ", "-");
   //changing the input to all lower case
-  choice = choice.toLowerCase();
+  choice = choice.toLowerCase(); 
+
+  
+
   const url = `https://www.dnd5eapi.co/api/spells/${choice}`  
 
   fetch(url)
@@ -57,13 +63,20 @@ function getFetch(){
 
         // need to make a loop
         document.querySelector(`#highLvl`).textContent = data.higher_level;
-        document.querySelector(`#dmg`).textContent = data.damage.damage_type.damage_at_slot_level; 
-
+        document.querySelector(`#dmg`).textContent = data.damage.damage_type.damage_at_slot_level;
         
-        //
-        
+               
         
         // looping section
+
+        // clear the Li before adding new on to the existing list
+
+        while(classList.hasChildNodes()){
+            data.classes.foreach(obj => {
+            classList.removeChild(classList.firstChild)
+          });          
+        }
+
 
         // forEach loop, itertare through each element in an array
         data.classes.forEach(obj =>{
@@ -86,8 +99,9 @@ function getFetch(){
             // append li to ul
             document.querySelector(`#subClass`).appendChild(li);
 
-        })
-
+        })   
+        
+        
         
 
      })
@@ -96,5 +110,8 @@ function getFetch(){
       });
       
 }
+
+
+
 
 //make a console log of inputed and a conditonal before the loops

@@ -104,8 +104,8 @@ h3{
 }
 p{
   display: inline;
-  font-size: 17px;
-  
+  font-size: 16px;
+  font-style: bold;  
 }
 
 ul{
